@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네컷인생</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .box {
+            /* border: solid 1px #3d3d3d; */
+            margin: 0 auto;
+            background-color: #000000;
+            width: 540px;
+            padding-top: 1px;
+            padding-bottom: 20px;
+            /* padding-bottom: 150px; */
+
+        }
+
+        .box .img {
+            margin: 0 auto;
+            /* border-radius: 0.8em; */
+            margin: 20px 0 20px 20px;
+            width: 500px;
+            height: 340px;
+
+
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        .text-w {
+            position: relative;
+            width: 500px;
+            height: 149px;
+            /* background-color: #66aaff; */
+            margin: 0 auto;
+
+        }
+
+        .text {
+            width: 100%;
+
+            text-align: center;
+            color: #f1f1f1;
+            font-size: 25px;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%)
+        }
+
+        #s1 {
+            background-color: #f1f1f1;
+        }
+
+        #s2 {
+            background-color: #f1f1f1;
+        }
+
+        #s3 {
+            background-color: #f1f1f1;
+        }
+
+        #s4 {
+            background-color: #f1f1f1;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .divbtn {
+            margin: 15px;
+            text-align: center;
+        }
+
+        button {
+            border-radius: 0.8em;
+            border: none;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            margin: 15px auto;
+            background-color: #66aaff;
+            text-align: center;
+            cursor: pointer;
+            color: #f1f1f1;
+
+        }
+
+        .divbtn button:hover {
+            background-color: #23354b;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="divbtn">
+        <button onclick="fileBtn.s1()">1</button>
+        <button onclick="fileBtn.s2()">2</button>
+        <button onclick="fileBtn.s3()">3</button>
+        <button onclick="fileBtn.s4()">4</button>
+    </div>
+
+    <div style="margin: 0 auto; text-align: center; padding: 10px 10px;">
+        <input type="text" id="textinput" placeholder="적으시오" onfocus="this.value=''">
+        <button onclick=" changeinput()">수정</button>
+    </div>
+
+    <div class="box" id="capture-box">
+
+        <div class="img" id="s1"></div>
+        <div class="img" id="s2"></div>
+        <div class="img" id="s3"></div>
+        <div class="img" id="s4"></div>
+
+        <div class="text-w">
+            <div class="text">-</div>
+        </div>
+
+    </div>
+
+    <div class="hidden">
+        <input type="file" id="s1-input" accept=".jpg, .png" onchange="uploding.s1(this)">
+        <input type="file" id="s2-input" accept=".jpg, .png" onchange="uploding.s2(this)">
+        <input type="file" id="s3-input" accept=".jpg, .png" onchange="uploding.s3(this)">
+        <input type="file" id="s4-input" accept=".jpg, .png" onchange="uploding.s4(this)">
+    </div>
+
+    <div class="divbtn">
+        <button id="cap">다운로드</button>
+    </div>
+
+
+</body>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+<script>
+    const captureElement = document.getElementById("capture-box");
+    const btn = document.getElementById("cap");
+
+    const s1 = document.getElementById("s1");
+    const s2 = document.getElementById("s2");
+    const s3 = document.getElementById("s3");
+    const s4 = document.getElementById("s4");
+
+    const fileBtn = {
+        s1: () => {
+            document.getElementById('s1-input').click();
+        },
+        s2: () => {
+            document.getElementById('s2-input').click();
+        },
+        s3: () => {
+            document.getElementById('s3-input').click();
+        },
+        s4: () => {
+            document.getElementById('s4-input').click();
+        }
+    }
+
+
+    const uploding = {
+        s1: (input) => {
+            var file = input.files[0];
+            s1.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+        },
+        s2: (input) => {
+            var file = input.files[0];
+            s2.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+        },
+        s3: (input) => {
+            var file = input.files[0];
+            s3.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+        },
+        s4: (input) => {
+            var file = input.files[0];
+            s4.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+        }
+    }
+
+    function changeinput() {
+        inputtext = document.querySelector('#textinput').value;
+        document.querySelector('.text').innerText = inputtext;
+    }
+
+    btn.addEventListener("click", function () {
+        const canvas = document.createElement("canvas");
+        html2canvas(captureElement).then((canvas) => {
+            const dataURL = canvas.toDataURL();
+            const link = document.createElement("a");
+            link.download = "capture.png";
+            link.href = dataURL;
+            link.click();
+        });
+    });
+
+</script>
+
+
+</html>
