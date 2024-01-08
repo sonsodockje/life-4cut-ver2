@@ -170,25 +170,40 @@
     }
 
 
-    const uploding = {
-        s1: (input) => {
-            var file = input.files[0];
-            s1.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
-        },
-        s2: (input) => {
-            var file = input.files[0];
-            s2.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
-        },
-        s3: (input) => {
-            var file = input.files[0];
-            s3.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
-        },
-        s4: (input) => {
-            var file = input.files[0];
-            s4.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
-        }
-    }
+    // const uploding = {
+    //     s1: (input) => {
+    //         var file = input.files[0];
+    //         s1.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+    //     },
+    //     s2: (input) => {
+    //         var file = input.files[0];
+    //         s2.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+    //     },
+    //     s3: (input) => {
+    //         var file = input.files[0];
+    //         s3.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+    //     },
+    //     s4: (input) => {
+    //         var file = input.files[0];
+    //         s4.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")"
+    //     }
+    // }
 
+    const uploding = (id, input) => {
+    const element = document.getElementById(id);
+    if (element) {
+        const file = input.files[0];
+        element.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")";
+    }
+};
+
+uploding('s1', input1);
+uploding('s2', input2);
+uploding('s3', input3);
+uploding('s4', input4);
+
+
+    
     function changeinput() {
         inputtext = document.querySelector('#textinput').value;
         document.querySelector('.text').innerText = inputtext;
